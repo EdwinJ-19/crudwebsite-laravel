@@ -21,5 +21,6 @@
             </div>
             @endforeach
         </div>
+        {{-- {{ $note->links() }} --}}
     </div>
 </x-layout>
