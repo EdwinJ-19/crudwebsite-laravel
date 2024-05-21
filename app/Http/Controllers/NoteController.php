@@ -30,7 +30,13 @@ class NoteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'note' => ['required','string']
+        ]);
+        $data['user_id'] = 1;
+        $note = Note::create($data);  //in this line of code will not work but to specify in associative array, we need to do in Hasfactory.php
+
+        return to_route('note.show',$note)->with('message','Note was Created');
     }
 
     /**
@@ -54,7 +60,12 @@ class NoteController extends Controller
      */
     public function update(Request $request, Note $note)
     {
-        //
+        $data = $request->validate([
+            'note' => ['required','string']
+        ]);
+       $note->update($data);
+
+        return to_route('note.show',$note)->with('message','Note was Updated');
     }
 
     /**
